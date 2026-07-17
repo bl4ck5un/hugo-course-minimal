@@ -1,0 +1,8 @@
+{{ define "main" }}
+  {{ $path := site.Params.currentCoursePath | default "/" }}
+  {{ with site.GetPage $path }}
+    {{ partial "course-page.html" . }}
+  {{ else }}
+    {{ errorf "course-minimal: params.currentCoursePath %q does not resolve to a page" $path }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand navbar-dark site-header py-2" data-bs-theme="dark" aria-label="Site navigation">
+  <div class="container gap-2">
+    <a class="navbar-brand py-0" href="{{ site.Home.RelPermalink }}" aria-label="Course home">
+      {{ with site.Params.brandLogo }}
+        <img class="site-brand-logo" src="{{ . | relURL }}" alt="{{ site.Params.brandLogoAlt | default site.Params.brandText | default site.Title }}">
+      {{ else }}
+        {{ site.Params.brandText | default site.Title }}
+      {{ end }}
+    </a>
+    <ul class="navbar-nav ms-auto mb-0 ps-0">
+      {{ range site.Menus.main }}
+        <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">
+          {{ if .HasChildren }}
+            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ .Name }}</button>
+            <ul class="dropdown-menu dropdown-menu-end mb-0 ps-0">
+              {{ range .Children }}<li><a class="dropdown-item" href="{{ .URL | relURL }}">{{ .Name }}</a></li>{{ end }}
+            </ul>
+          {{ else }}
+            <a class="nav-link" href="{{ .URL | relURL }}">{{ .Name }}</a>
+          {{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</nav>

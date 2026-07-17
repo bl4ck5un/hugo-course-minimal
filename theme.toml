@@ -1,0 +1,12 @@
+name = "Hugo Course Minimal"
+license = "MIT"
+licenselink = "https://github.com/bl4ck5un/hugo-course-minimal/blob/main/LICENSE"
+description = "A minimal, Bootstrap-powered Hugo theme for recurring university courses."
+homepage = "https://github.com/bl4ck5un/hugo-course-minimal"
+tags = ["course", "academic", "bootstrap", "minimal", "responsive"]
+features = ["course schedule", "slide previews", "archives", "structured data"]
+min_version = "0.123.0"
+
+[author]
+  name = "Fan Zhang"
+  homepage = "https://fanzhang.me"

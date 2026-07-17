@@ -1,0 +1,5 @@
+<footer class="site-footer border-top py-3 small">
+  <div class="container text-body-secondary">
+    {{ with site.Params.footerText }}{{ . | markdownify }}{{ else }}<p class="mb-0">&copy; {{ now.Year }} {{ site.Title }}</p>{{ end }}
+  </div>
+</footer>

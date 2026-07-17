@@ -1,0 +1,14 @@
+{{ define "main" }}
+  {{ partial "course-header.html" . }}
+  <main class="container py-4" id="main-content">
+    <header class="border-bottom mb-4 pb-3">
+      <h1 class="h3 mb-1">{{ .Title }}</h1>
+      {{ with .Params.semester }}<p class="small text-body-secondary mb-0">{{ . }}{{ with $.Params.course_code }} · {{ . }}{{ end }}</p>{{ end }}
+    </header>
+    <div class="row g-4 align-items-start">
+      <aside class="col-lg-3 d-none d-lg-block sticky-top small toc" aria-label="Page sections">{{ .TableOfContents }}</aside>
+      <article class="col-lg-9 content-body">{{ .Content }}</article>
+    </div>
+  </main>
+  {{ partial "course-footer.html" . }}
+{{ end }}

@@ -1,0 +1,76 @@
+:root {
+  --course-accent: #0d6efd;
+}
+
+.site-header {
+  background: var(--course-accent);
+}
+
+.site-brand-logo {
+  display: block;
+  width: auto;
+  max-width: 180px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.page-content {
+  min-width: 0;
+}
+
+.toc {
+  top: 1rem;
+}
+
+.toc #TableOfContents ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  border-left: 1px solid var(--bs-border-color);
+}
+
+.toc #TableOfContents ul ul {
+  padding-left: 0.75rem;
+  border-left: 0;
+}
+
+.toc #TableOfContents a {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+.toc #TableOfContents a:hover {
+  color: var(--bs-link-color);
+  text-decoration: underline;
+}
+
+.person-photo {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.site-footer p {
+  margin-bottom: 0;
+}
+
+.content-body img {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.content-body blockquote {
+  margin: 1rem 0;
+  padding: 0.65rem 1rem;
+  border-left: 3px solid var(--course-accent);
+  background: var(--bs-tertiary-bg);
+}
+
+@media (max-width: 767.98px) {
+  .schedule-card-media {
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--bs-border-color) !important;
+  }
+}

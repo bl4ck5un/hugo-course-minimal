@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract network pattern</title>
+  <desc id="desc">A subtle geometric pattern concentrated on the right side.</desc>
+  <rect width="1600" height="900" fill="#f7f4eb"/>
+  <g fill="none" stroke="#214761" stroke-width="2" opacity=".28">
+    <circle cx="1310" cy="440" r="235"/>
+    <circle cx="1310" cy="440" r="175"/>
+    <circle cx="1310" cy="440" r="105"/>
+    <path d="M760 730H960V520h150V300h190M900 170h220v130h330M1040 820V650h270V440h260"/>
+    <path d="M930 610l180-170 200 0 165-180M1080 680l230-240 190 180"/>
+  </g>
+  <g fill="#214761" opacity=".55">
+    <circle cx="760" cy="730" r="7"/><circle cx="960" cy="520" r="7"/>
+    <circle cx="1110" cy="300" r="7"/><circle cx="1310" cy="440" r="9"/>
+    <circle cx="1450" cy="300" r="7"/><circle cx="1500" cy="620" r="7"/>
+    <rect x="1160" y="160" width="65" height="65"/><rect x="1430" y="690" width="85" height="85"/>
+  </g>
+</svg>

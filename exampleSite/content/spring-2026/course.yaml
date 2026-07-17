@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../../schemas/course.schema.json
+
+updates:
+  - text: "Welcome! The first lecture meets on January 12."
+
+information:
+  meeting:
+    days: "Monday and Wednesday"
+    time: "11:30am–12:45pm"
+  location: "Room 101, Computing Center"
+  platforms:
+    - label: "Discussion board"
+      url: "https://example.com/discuss"
+
+instructor:
+  name: "Alex Morgan"
+  title: "Prof."
+  url: "https://example.com"
+  photo: "/instructor.svg"
+  office_hours:
+    day: "Tuesday"
+    time: "2–3pm"
+    location: "Office 210"
+
+staff:
+  name: "Jordan Lee"
+  role: "Teaching Assistant"
+  photo: "/staff.svg"
+  office_hours:
+    day: "Thursday"
+    time: "4–5pm"
+
+schedule:
+  sections:
+    - title: "Section I: Foundations"
+      lectures:
+        - number: 1
+          date: "Jan 12"
+          title: "Course introduction"
+        - number: 2
+          date: "Jan 14"
+          title: "Threat modeling"
+          reference:
+            - label: "A short guide to threat modeling"
+              url: "https://example.com/reading"
+          assignment:
+            - "Lab 1: Model a small web application"
+    - title: "Section II: Secure Systems"
+      lectures:
+        - number: 3
+          date: "Jan 21"
+          title: "Authentication and sessions"
+          note_text: "Guest lecture"

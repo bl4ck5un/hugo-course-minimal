@@ -1,0 +1,34 @@
+baseURL: /
+locale: en-us
+title: Applied Security
+theme: hugo-course-minimal
+
+disableKinds:
+  - taxonomy
+  - term
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+params:
+  currentCoursePath: /spring-2026
+  courseCode: CPSC 4000
+  courseTitle: Applied Security
+  institution: Example University
+  description: A demonstration site for the Hugo Course Minimal theme.
+  brandText: Example University
+  footerText: "© Course Staff · [Department website](https://example.com)"
+  accentColor: "#214761"
+  heroImage: /hero.svg
+
+menus:
+  main:
+    - name: Archive
+      identifier: archive
+      weight: 10
+    - name: Fall 2025
+      parent: archive
+      pageRef: /fall-2025
+      weight: 10

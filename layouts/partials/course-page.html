@@ -1,0 +1,167 @@
+{{ $page := . }}
+{{ $courseFile := $page.Resources.GetMatch "course.yaml" }}
+{{ if not $courseFile }}{{ errorf "course-minimal: %s must include course.yaml as a page resource" $page.Path }}{{ end }}
+{{ $course := $courseFile | transform.Unmarshal }}
+{{ $info := $course.information }}
+{{ $instructor := $course.instructor }}
+{{ $staff := $course.staff }}
+{{ $schedule := $course.schedule }}
+{{ $updates := $course.updates }}
+{{ $heroImage := site.Params.heroImage }}
+
+{{ partial "course-header.html" $page }}
+
+<main class="container py-4" id="main-content">
+  <header class="position-relative overflow-hidden bg-body-tertiary border rounded-3 py-5 px-4 px-lg-5 mb-5">
+    {{ with $heroImage }}<img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover d-none d-md-block" src="{{ . | relURL }}" alt="" aria-hidden="true" fetchpriority="high">{{ end }}
+    <div class="position-relative {{ if $heroImage }}col-lg-7{{ else }}col-lg-9{{ end }} py-lg-4">
+      <p class="small fw-semibold text-primary text-uppercase mb-2">
+        {{ site.Params.courseCode }}{{ with site.Params.institution }} · {{ . }}{{ end }}
+      </p>
+      <h1 class="display-4 fw-semibold mb-3">{{ site.Params.courseTitle | default $page.Title }}</h1>
+      <div class="d-flex flex-wrap gap-2 mt-4">
+        <a class="btn btn-primary" href="#schedule">View schedule</a>
+        <a class="btn btn-outline-secondary" href="#information">Course information</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="row g-4 align-items-start">
+    <nav class="col-lg-2 d-none d-lg-block sticky-top small toc" aria-label="Page sections">
+      <ul class="list-unstyled border-start mb-0">
+        {{ with $updates }}<li><a class="d-block link-body-emphasis text-decoration-none px-2 py-1" href="#announcements">Announcements</a></li>{{ end }}
+        <li><a class="d-block link-body-emphasis text-decoration-none px-2 py-1" href="#information">Information</a></li>
+        <li><a class="d-block link-body-emphasis text-decoration-none px-2 py-1" href="#overview">Description</a></li>
+        <li><a class="d-block link-body-emphasis text-decoration-none px-2 py-1" href="#schedule">Schedule</a></li>
+      </ul>
+    </nav>
+
+    <div class="col-lg-10 page-content">
+      {{ with $updates }}
+        <section class="border-bottom mb-4 pb-4" id="announcements">
+          <h2>Announcements</h2>
+          <ul>{{ range . }}<li>{{ .text }}</li>{{ end }}</ul>
+        </section>
+      {{ end }}
+
+      <section class="border-bottom mb-4 pb-4" id="information">
+        <h2>Course Information</h2>
+        <div class="row g-4 mb-2">
+          <div class="{{ if $info.platforms }}col-md-6{{ else }}col-12{{ end }}">
+            <h3 class="h6">Time/location</h3>
+            <ul>
+              <li>{{ $info.meeting.days }}, {{ $info.meeting.time }}</li>
+              <li>{{ $info.location }}</li>
+            </ul>
+          </div>
+          {{ with $info.platforms }}
+            <div class="col-md-6">
+              <h3 class="h6">Platforms</h3>
+              <ul>{{ range . }}<li>{{ if .url }}<a href="{{ .url }}">{{ .label }}</a>{{ else }}{{ .label }}{{ end }}</li>{{ end }}</ul>
+            </div>
+          {{ end }}
+        </div>
+
+        <div class="row g-4">
+          <div class="{{ if $staff }}col-md-6{{ else }}col-12{{ end }}">
+            <h3 class="h6">Instructor</h3>
+            <div class="d-flex gap-2 align-items-start my-2">
+              <img class="person-photo flex-shrink-0" src="{{ $instructor.photo | relURL }}" alt="{{ $instructor.title }} {{ $instructor.name }}">
+              <div class="small">
+                <p class="fw-semibold mb-1"><a href="{{ $instructor.url }}">{{ $instructor.title }} {{ $instructor.name }}</a></p>
+                {{ with $instructor.office_hours }}<p class="mb-0"><span class="text-body-secondary">Office hours:</span> {{ .day }}, {{ .time }}{{ with .location }} in {{ . }}{{ end }}</p>{{ end }}
+              </div>
+            </div>
+          </div>
+
+          {{ with $staff }}
+            <div class="col-md-6">
+              <h3 class="h6">{{ .role }}</h3>
+              <div class="d-flex gap-2 align-items-start my-2">
+                <img class="person-photo flex-shrink-0" src="{{ .photo | relURL }}" alt="{{ .name }}">
+                <div class="small">
+                  <p class="fw-semibold mb-1">{{ .name }}</p>
+                  {{ with .office_hours }}<p class="mb-0"><span class="text-body-secondary">Office hours:</span> {{ .day }}, {{ .time }}{{ with .location }} in {{ . }}{{ end }}</p>{{ end }}
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </section>
+
+      <section class="border-bottom mb-4 pb-4" id="overview">
+        {{ $page.Content }}
+      </section>
+
+      <section class="border-bottom mb-4 pb-4" id="schedule">
+        <h2>Lecture Schedule</h2>
+        {{ range $schedule.sections }}
+          <section class="mt-4" aria-labelledby="schedule-section-{{ .title | anchorize }}">
+            <h3 class="h5 border-bottom pb-2 mb-3" id="schedule-section-{{ .title | anchorize }}">{{ .title }}</h3>
+            <div class="d-grid gap-3">
+              {{ range .lectures }}
+                {{ $slide := false }}
+                {{ with .slides }}{{ $slide = index . 0 }}{{ end }}
+                {{ $cover := false }}
+                {{ $pdf := false }}
+                {{ with $slide }}
+                  {{ $pdf = $page.Resources.GetMatch (printf "slides/%s" .file) }}
+                  {{ with .cover }}{{ $cover = $page.Resources.GetMatch (printf "slides/%s" .) }}{{ end }}
+                {{ end }}
+
+                <article class="card overflow-hidden{{ if not $pdf }} bg-body-tertiary{{ end }}">
+                  <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center bg-body-tertiary border-end schedule-card-media">
+                      {{ if and $cover $pdf }}
+                        <a class="d-block w-100 bg-body-tertiary" href="{{ $pdf.RelPermalink }}" aria-label="Open lecture {{ .number }} slides">
+                          <div class="ratio ratio-16x9"><img class="w-100 h-100 object-fit-contain" src="{{ $cover.RelPermalink }}" alt="Preview of {{ .title }} slides" loading="lazy"></div>
+                        </a>
+                      {{ else }}
+                        <div class="ratio ratio-16x9"><span class="d-flex align-items-center justify-content-center small text-body-secondary">{{ if $pdf }}Preview not available{{ else }}Slides not released{{ end }}</span></div>
+                      {{ end }}
+                    </div>
+
+                    <div class="col-md-8 d-flex">
+                      <div class="card-body d-flex flex-column w-100">
+                        <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                          <span class="badge text-bg-light border">Lecture {{ .number }}</span>
+                          <span class="small text-body-secondary text-nowrap">{{ .date }}</span>
+                        </div>
+                        <h4 class="card-title h5 mb-0 text-break">{{ .title }}</h4>
+
+                        {{ with .reference }}
+                          <div class="small mt-3">
+                            <div class="fw-semibold mb-1">References:</div>
+                            <ul class="d-grid gap-1 mb-0 ps-3">{{ range . }}<li><a class="text-break" href="{{ .url }}">{{ .label | default "Reference" }}</a></li>{{ end }}</ul>
+                          </div>
+                        {{ end }}
+
+                        {{ with .assignment }}
+                          <div class="alert alert-warning small py-2 px-3 mt-3 mb-0">
+                            <div class="fw-semibold mb-1">Milestones:</div>
+                            <ul class="mb-0 ps-3">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+                          </div>
+                        {{ end }}
+
+                        {{ with .note_text }}<p class="alert alert-warning small py-2 px-3 mt-3 mb-0">{{ . }}</p>{{ end }}
+
+                        {{ if or .notes .slides }}
+                          <div class="schedule-card-actions d-flex flex-wrap gap-2 mt-auto pt-3">
+                            {{ range .notes }}<a class="btn btn-sm btn-outline-primary" href="{{ .url }}">Notes</a>{{ end }}
+                            {{ range .slides }}{{ with $page.Resources.GetMatch (printf "slides/%s" .file) }}<a class="btn btn-sm btn-primary" href="{{ .RelPermalink }}">Slides</a>{{ end }}{{ end }}
+                          </div>
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+      </section>
+    </div>
+  </div>
+</main>
+
+{{ partial "course-footer.html" $page }}
