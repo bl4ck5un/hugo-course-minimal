@@ -13,7 +13,7 @@
 
 <main class="container py-4" id="main-content">
   <header class="position-relative overflow-hidden bg-body-tertiary border rounded-3 py-5 px-4 px-lg-5 mb-5">
-    {{ with $heroImage }}<img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover d-none d-md-block" src="{{ . | relURL }}" alt="" aria-hidden="true" fetchpriority="high">{{ end }}
+    {{ with $heroImage }}<img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover d-none d-md-block" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" aria-hidden="true" fetchpriority="high">{{ end }}
     <div class="position-relative {{ if $heroImage }}col-lg-7{{ else }}col-lg-9{{ end }} py-lg-4">
       <p class="small fw-semibold text-primary text-uppercase mb-2">
         {{ site.Params.courseCode }}{{ with site.Params.institution }} · {{ . }}{{ end }}
@@ -66,7 +66,7 @@
           <div class="{{ if $staff }}col-md-6{{ else }}col-12{{ end }}">
             <h3 class="h6">Instructor</h3>
             <div class="d-flex gap-2 align-items-start my-2">
-              <img class="person-photo flex-shrink-0" src="{{ $instructor.photo | relURL }}" alt="{{ $instructor.title }} {{ $instructor.name }}">
+              <img class="person-photo flex-shrink-0" src="{{ strings.TrimPrefix "/" $instructor.photo | relURL }}" alt="{{ $instructor.title }} {{ $instructor.name }}">
               <div class="small">
                 <p class="fw-semibold mb-1"><a href="{{ $instructor.url }}">{{ $instructor.title }} {{ $instructor.name }}</a></p>
                 {{ with $instructor.office_hours }}<p class="mb-0"><span class="text-body-secondary">Office hours:</span> {{ .day }}, {{ .time }}{{ with .location }} in {{ . }}{{ end }}</p>{{ end }}
@@ -78,7 +78,7 @@
             <div class="col-md-6">
               <h3 class="h6">{{ .role }}</h3>
               <div class="d-flex gap-2 align-items-start my-2">
-                <img class="person-photo flex-shrink-0" src="{{ .photo | relURL }}" alt="{{ .name }}">
+                <img class="person-photo flex-shrink-0" src="{{ strings.TrimPrefix "/" .photo | relURL }}" alt="{{ .name }}">
                 <div class="small">
                   <p class="fw-semibold mb-1">{{ .name }}</p>
                   {{ with .office_hours }}<p class="mb-0"><span class="text-body-secondary">Office hours:</span> {{ .day }}, {{ .time }}{{ with .location }} in {{ . }}{{ end }}</p>{{ end }}

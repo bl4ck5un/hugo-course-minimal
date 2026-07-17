@@ -2,7 +2,7 @@
   <div class="container gap-2">
     <a class="navbar-brand py-0" href="{{ site.Home.RelPermalink }}" aria-label="Course home">
       {{ with site.Params.brandLogo }}
-        <img class="site-brand-logo" src="{{ . | relURL }}" alt="{{ site.Params.brandLogoAlt | default site.Params.brandText | default site.Title }}">
+        <img class="site-brand-logo" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ site.Params.brandLogoAlt | default site.Params.brandText | default site.Title }}">
       {{ else }}
         {{ site.Params.brandText | default site.Title }}
       {{ end }}
