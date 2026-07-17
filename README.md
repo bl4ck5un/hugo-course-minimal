@@ -4,6 +4,8 @@ A minimal, responsive Hugo theme for recurring university course websites.
 It uses Bootstrap 5 for reusable UI, keeps semester content in page bundles,
 and renders schedules from validated YAML data.
 
+[View the example site](https://bl4ck5un.github.io/hugo-course-minimal/)
+
 ## Features
 
 - Current-course landing page with optional hero artwork
