@@ -8,6 +8,7 @@
 {{ $schedule := $course.schedule }}
 {{ $updates := $course.updates }}
 {{ $heroImage := site.Params.heroImage }}
+{{ $slidesPlaceholderImage := site.Params.slidesPlaceholderImage }}
 
 {{ partial "course-header.html" $page }}
 
@@ -118,7 +119,13 @@
                           <div class="ratio ratio-16x9"><img class="w-100 h-100 object-fit-contain" src="{{ $cover.RelPermalink }}" alt="Preview of {{ .title }} slides" loading="lazy"></div>
                         </a>
                       {{ else }}
-                        <div class="ratio ratio-16x9"><span class="d-flex align-items-center justify-content-center small text-body-secondary">{{ if $pdf }}Preview not available{{ else }}Slides not released{{ end }}</span></div>
+                        {{ with $slidesPlaceholderImage }}
+                          <div class="ratio ratio-16x9">
+                            <img class="w-100 h-100 object-fit-cover" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ if $pdf }}Slide preview not available{{ else }}Slides forthcoming{{ end }}" loading="lazy">
+                          </div>
+                        {{ else }}
+                          <div class="ratio ratio-16x9"><span class="d-flex align-items-center justify-content-center small text-body-secondary">{{ if $pdf }}Preview not available{{ else }}Slides not released{{ end }}</span></div>
+                        {{ end }}
                       {{ end }}
                     </div>
 
