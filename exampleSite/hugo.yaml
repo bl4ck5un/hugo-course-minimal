@@ -22,6 +22,7 @@ params:
   footerText: "© Course Staff · [Department website](https://example.com)"
   accentColor: "#214761"
   heroImage: /hero.svg
+  repositoryURL: https://github.com/bl4ck5un/hugo-course-minimal
 
 menus:
   main:

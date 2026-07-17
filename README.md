@@ -43,6 +43,7 @@ params:
   brandText: Example University
   accentColor: "#214761"
   heroImage: /hero.svg
+  repositoryURL: https://github.com/example/course-site
   footerText: "© Course Staff"
 ```
 
