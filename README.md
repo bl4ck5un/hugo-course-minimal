@@ -56,6 +56,10 @@ Use `customCSS` for site-specific branding or overrides. Paths can point to
 files in the site `static/` directory, such as `static/css/site.css`, or to
 Hugo assets under `assets/`.
 
+Use `brandHTML` instead of `brandText` when the navbar brand needs small,
+trusted HTML such as an institutional wordmark span. `brandLogo` remains the
+preferred option for image-based marks.
+
 ## Course edition
 
 Create an edition page:
@@ -79,6 +83,10 @@ disclosure sections:
 Background in programming is recommended.
 {{</* /fold */>}}
 ```
+
+Lecture notes can use `layout: note`. Optional front matter fields
+`course_page`, `course_label`, `lecture`, and `lecture_date` render the small
+metadata line under the title, and `toc: false` hides the section sidebar.
 
 ## Course data
 

@@ -1,0 +1,23 @@
+{{ define "main" }}
+  {{ partial "course-header.html" . }}
+  <main class="container py-4" id="main-content">
+    <header class="border-bottom mb-4 pb-3">
+      <h1 class="h3 mb-1">{{ .Title }}</h1>
+      {{ $meta := slice }}
+      {{ with .Params.course_page }}
+        {{ $label := $.Params.course_label | default . }}
+        {{ $meta = $meta | append (printf `<a href="%s">%s</a>` (relref $ .) $label) }}
+      {{ else with .Params.course_label }}
+        {{ $meta = $meta | append . }}
+      {{ end }}
+      {{ with .Params.lecture }}{{ $meta = $meta | append . }}{{ end }}
+      {{ with .Params.lecture_date }}{{ $meta = $meta | append . }}{{ end }}
+      {{ with $meta }}<p class="small text-body-secondary mb-0">{{ delimit . " · " | safeHTML }}</p>{{ end }}
+    </header>
+    <div class="row g-4 align-items-start">
+      {{ if ne .Params.toc false }}<aside class="col-lg-3 d-none d-lg-block sticky-top small toc" aria-label="Lecture sections">{{ .TableOfContents }}</aside>{{ end }}
+      <article class="{{ if ne .Params.toc false }}col-lg-9 {{ end }}content-body">{{ .Content }}</article>
+    </div>
+  </main>
+  {{ partial "course-footer.html" . }}
+{{ end }}
