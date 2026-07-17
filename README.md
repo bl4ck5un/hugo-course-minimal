@@ -43,12 +43,18 @@ params:
   brandText: Example University
   accentColor: "#214761"
   heroImage: /hero.svg
+  customCSS:
+    - /css/site.css
   repositoryURL: https://github.com/example/course-site
   footerText: "© Course Staff"
 ```
 
 `currentCoursePath` identifies the content page bundle rendered on the home
 page. That bundle must contain `_index.md` and `course.yaml`.
+
+Use `customCSS` for site-specific branding or overrides. Paths can point to
+files in the site `static/` directory, such as `static/css/site.css`, or to
+Hugo assets under `assets/`.
 
 ## Course edition
 

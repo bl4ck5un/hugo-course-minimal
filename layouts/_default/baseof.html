@@ -13,6 +13,15 @@
     {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
     <style>:root { --course-accent: {{ site.Params.accentColor | default "#0d6efd" }}; }</style>
+    {{ range site.Params.customCSS }}
+      {{ $path := strings.TrimPrefix "/" . }}
+      {{ with resources.Get $path }}
+        {{ $customCSS := . | minify | fingerprint }}
+        <link rel="stylesheet" href="{{ $customCSS.RelPermalink }}" integrity="{{ $customCSS.Data.Integrity }}">
+      {{ else }}
+        <link rel="stylesheet" href="{{ $path | relURL }}">
+      {{ end }}
+    {{ end }}
     {{ if .Params.math }}{{ partial "katex.html" . }}{{ end }}
   </head>
   <body>
