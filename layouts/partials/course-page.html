@@ -14,7 +14,7 @@
 
 <main class="container py-4" id="main-content">
   <header class="position-relative overflow-hidden bg-body-tertiary border rounded-3 py-5 px-4 px-lg-5 mb-5">
-    {{ with $heroImage }}<img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover d-none d-md-block" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" aria-hidden="true" fetchpriority="high">{{ end }}
+    {{ with $heroImage }}<img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" aria-hidden="true" fetchpriority="high">{{ end }}
     <div class="position-relative {{ if $heroImage }}col-lg-7{{ else }}col-lg-9{{ end }} py-lg-4">
       <p class="small fw-semibold text-primary text-uppercase mb-2">
         {{ site.Params.courseCode }}{{ with site.Params.institution }} · {{ . }}{{ end }}
