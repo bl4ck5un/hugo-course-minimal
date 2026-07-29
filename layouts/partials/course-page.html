@@ -102,6 +102,14 @@
             <h3 class="h5 border-bottom pb-2 mb-3" id="schedule-section-{{ .title | anchorize }}">{{ .title }}</h3>
             <div class="d-grid gap-3">
               {{ range .lectures }}
+                {{ if not .number }}
+                  <article class="alert alert-warning border-warning-subtle shadow-sm mb-0 px-3 py-3">
+                    <h4 class="h6 fw-bold text-center mb-0">
+                      {{ .title }}
+                      <span class="fw-normal">{{ partial "schedule-date.html" (dict "date" .date "format" site.Params.scheduleDateFormat) }} - {{ partial "schedule-date.html" (dict "date" .resume_date "format" site.Params.scheduleDateFormat) }}</span>
+                    </h4>
+                  </article>
+                {{ else }}
                 {{ $slide := false }}
                 {{ with .slides }}{{ $slide = index . 0 }}{{ end }}
                 {{ $cover := false }}
@@ -133,7 +141,7 @@
                       <div class="card-body d-flex flex-column w-100">
                         <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
                           <span class="badge text-bg-light border">Lecture {{ .number }}</span>
-                          <span class="small text-body-secondary text-nowrap">{{ .date }}</span>
+                          <span class="text-nowrap">{{ partial "schedule-date.html" (dict "date" .date "format" site.Params.scheduleDateFormat) }}</span>
                         </div>
                         <h4 class="card-title h5 mb-0 text-break">{{ .title }}</h4>
 
@@ -163,6 +171,7 @@
                     </div>
                   </div>
                 </article>
+                {{ end }}
               {{ end }}
             </div>
           </section>

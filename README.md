@@ -114,7 +114,7 @@ schedule:
     - title: "Section I: Foundations"
       lectures:
         - number: 1
-          date: "Jan 12"
+          date: "2026-01-12"
           title: "Course introduction"
           slides:
             - file: "lecture-01.pdf"
@@ -124,6 +124,21 @@ schedule:
               url: "https://example.com/reading"
           assignment:
             - "Lab 1: Threat modeling"
+```
+
+ISO schedule dates are rendered as semantic HTML and formatted with Hugo's
+`params.scheduleDateFormat` setting, which defaults to `01-02 (Mon)` (for
+example, `09-02 (Wed)`). Use a display label such as `TBA` when a lecture does
+not yet have a calendar date.
+
+Add recesses to the ordered `lectures` list so they appear at the appropriate
+point in the schedule. A null lecture number identifies a recess:
+
+```yaml
+- number: null
+  date: "2026-10-20"
+  resume_date: "2026-10-26"
+  title: "October recess"
 ```
 
 The slide `cover` is optional. If a PDF exists without a preview, the card

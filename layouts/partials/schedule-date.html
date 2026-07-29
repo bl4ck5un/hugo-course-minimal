@@ -1,0 +1,7 @@
+{{- $value := printf "%v" .date -}}
+{{- if findRE `^\d{4}-\d{2}-\d{2}$` $value -}}
+  {{- $date := time.AsTime $value -}}
+  <time datetime="{{ $date.Format "2006-01-02" }}">{{ time.Format (.format | default "01-02 (Mon)") $date }}</time>
+{{- else -}}
+  {{- $value -}}
+{{- end -}}
