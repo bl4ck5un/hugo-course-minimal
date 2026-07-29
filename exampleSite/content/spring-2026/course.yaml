@@ -35,19 +35,23 @@ schedule:
     - title: "Section I: Foundations"
       lectures:
         - number: 1
-          date: "Jan 12"
+          date: "2026-01-12"
           title: "Course introduction"
         - number: 2
-          date: "Jan 14"
+          date: "2026-01-14"
           title: "Threat modeling"
           reference:
             - label: "A short guide to threat modeling"
               url: "https://example.com/reading"
           assignment:
             - "Lab 1: Model a small web application"
+        - number: null
+          date: "2026-01-16"
+          resume_date: "2026-01-21"
+          title: "Winter recess"
     - title: "Section II: Secure Systems"
       lectures:
         - number: 3
-          date: "Jan 21"
+          date: "2026-01-21"
           title: "Authentication and sessions"
           note_text: "Guest lecture"
