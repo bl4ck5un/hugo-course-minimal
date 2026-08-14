@@ -35,8 +35,11 @@ Slides are modeled per lecture:
 ```yaml
 slides:
   - file: "lecture-01.pdf"
-    cover: "lecture-01.png"
+  - file: "lecture-01.pptx"
 ```
+
+PDF and PowerPoint slide files render as “Slides” download buttons. Slide
+preview images are not displayed.
 
 Assignments are a flat list under each lecture:
 

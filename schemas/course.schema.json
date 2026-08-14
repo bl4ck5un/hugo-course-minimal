@@ -111,31 +111,30 @@
     "lecture": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["number", "date", "title"],
+      "required": ["number"],
       "if": {
         "properties": {
           "number": {"type": "null"}
         }
       },
       "then": {
-        "required": ["resume_date"]
+        "required": ["text"]
+      },
+      "else": {
+        "required": ["date", "title"]
       },
       "properties": {
         "number": {
           "type": ["integer", "null"],
           "minimum": 1,
-          "description": "A positive lecture number, or null for a recess."
+          "description": "A positive lecture number, or null for a break."
         },
         "date": {
           "type": "string",
           "minLength": 1,
           "description": "An ISO 8601 calendar date (YYYY-MM-DD) or a display label such as TBA."
         },
-        "resume_date": {
-          "type": "string",
-          "minLength": 1,
-          "description": "The date classes resume after a recess."
-        },
+        "text": {"type": "string", "minLength": 1},
         "title": {"type": "string", "minLength": 1},
         "notes": {
           "type": "array",
@@ -154,6 +153,7 @@
           "minItems": 1,
           "items": {"type": "string", "minLength": 1}
         },
+        "description": {"type": "string"},
         "note_text": {"type": "string"}
       }
     },
@@ -179,8 +179,7 @@
       "additionalProperties": false,
       "required": ["file"],
       "properties": {
-        "file": {"type": "string", "pattern": "\\.pdf$"},
-        "cover": {"type": "string", "pattern": "\\.(png|jpe?g|webp)$"}
+        "file": {"type": "string", "pattern": "\\.(pdf|pptx)$"}
       }
     }
   }

@@ -71,7 +71,7 @@ content/
     ├── course.yaml
     └── slides/
         ├── lecture-01.pdf
-        └── lecture-01.png
+        └── lecture-01.pptx
 ```
 
 Use `layout: current-course` in `_index.md`. Ordinary Markdown becomes the
@@ -118,7 +118,7 @@ schedule:
           title: "Course introduction"
           slides:
             - file: "lecture-01.pdf"
-              cover: "lecture-01.png"
+            - file: "lecture-01.pptx"
           reference:
             - label: "Optional reading"
               url: "https://example.com/reading"
@@ -136,13 +136,11 @@ point in the schedule. A null lecture number identifies a recess:
 
 ```yaml
 - number: null
-  date: "2026-10-20"
-  resume_date: "2026-10-26"
-  title: "October recess"
+  text: "October recess, October 20–25"
 ```
 
-The slide `cover` is optional. If a PDF exists without a preview, the card
-shows “Preview not available” and still renders the Slides button.
+PDF and PowerPoint files both render as “Slides” download buttons. The
+schedule does not display slide preview images.
 
 ## Menus and archives
 

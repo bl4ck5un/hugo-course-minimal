@@ -8,23 +8,18 @@
 {{ $schedule := $course.schedule }}
 {{ $updates := $course.updates }}
 {{ $heroImage := site.Params.heroImage }}
-{{ $slidesPlaceholderImage := site.Params.slidesPlaceholderImage }}
 
 {{ partial "course-header.html" $page }}
 
 <main class="container py-4" id="main-content">
-  <header class="position-relative overflow-hidden bg-body-tertiary border rounded-3 py-5 px-4 px-lg-5 mb-5">
+  <header class="position-relative overflow-hidden bg-body-tertiary border rounded-3 py-4 px-4 px-lg-5 mb-4">
     {{ with $heroImage }}<img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" aria-hidden="true" fetchpriority="high">{{ end }}
-    <div class="position-relative {{ if $heroImage }}col-lg-7{{ else }}col-lg-9{{ end }} py-lg-4">
+    {{ with $heroImage }}<div class="position-absolute top-0 start-0 w-100 h-100 bg-body" style="opacity: 0.4" aria-hidden="true"></div>{{ end }}
+    <div class="position-relative w-100 text-center">
       <p class="small fw-semibold text-primary text-uppercase mb-2">
-        {{ site.Params.courseCode }}{{ with site.Params.institution }} · {{ . }}{{ end }}
+        {{ site.Params.courseCode }}
       </p>
-      <h1 class="display-4 fw-semibold mb-3">{{ site.Params.courseTitle | default $page.Title }}</h1>
-      <div class="d-flex flex-wrap gap-2 mt-4">
-        <a class="btn btn-primary" href="#schedule">View schedule</a>
-        <a class="btn btn-outline-secondary" href="#information">Course information</a>
-        {{ with site.Params.repositoryURL }}<a class="btn btn-outline-secondary" href="{{ . }}">View repository</a>{{ end }}
-      </div>
+      <h1 class="h2 fw-semibold mb-3">{{ site.Params.courseTitle | default $page.Title }}</h1>
     </div>
   </header>
 
@@ -103,47 +98,18 @@
             <div class="d-grid gap-3">
               {{ range .lectures }}
                 {{ if not .number }}
-                  <article class="alert alert-warning border-warning-subtle shadow-sm mb-0 px-3 py-3">
-                    <h4 class="h6 fw-bold text-center mb-0">
-                      {{ .title }}
-                      <span class="fw-normal">{{ partial "schedule-date.html" (dict "date" .date "format" site.Params.scheduleDateFormat) }} - {{ partial "schedule-date.html" (dict "date" .resume_date "format" site.Params.scheduleDateFormat) }}</span>
-                    </h4>
+                  <article class="border rounded bg-body-tertiary shadow-sm px-3 py-3">
+                    <p class="fw-semibold text-center mb-0">{{ .text }}</p>
                   </article>
                 {{ else }}
-                {{ $slide := false }}
-                {{ with .slides }}{{ $slide = index . 0 }}{{ end }}
-                {{ $cover := false }}
-                {{ $pdf := false }}
-                {{ with $slide }}
-                  {{ $pdf = $page.Resources.GetMatch (printf "slides/%s" .file) }}
-                  {{ with .cover }}{{ $cover = $page.Resources.GetMatch (printf "slides/%s" .) }}{{ end }}
-                {{ end }}
-
-                <article class="card overflow-hidden{{ if not $pdf }} bg-body-tertiary{{ end }}">
+                <article class="card overflow-hidden{{ if not .slides }} bg-body-tertiary{{ end }}">
                   <div class="row g-0">
-                    <div class="col-md-4 d-flex align-items-center bg-body-tertiary border-end schedule-card-media">
-                      {{ if and $cover $pdf }}
-                        <a class="d-block w-100 bg-body-tertiary" href="{{ $pdf.RelPermalink }}" aria-label="Open lecture {{ .number }} slides">
-                          <div class="ratio ratio-16x9"><img class="w-100 h-100 object-fit-contain" src="{{ $cover.RelPermalink }}" alt="Preview of {{ .title }} slides" loading="lazy"></div>
-                        </a>
-                      {{ else }}
-                        {{ with $slidesPlaceholderImage }}
-                          <div class="ratio ratio-16x9">
-                            <img class="w-100 h-100 object-fit-cover" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ if $pdf }}Slide preview not available{{ else }}Slides forthcoming{{ end }}" loading="lazy">
-                          </div>
-                        {{ else }}
-                          <div class="ratio ratio-16x9"><span class="d-flex align-items-center justify-content-center small text-body-secondary">{{ if $pdf }}Preview not available{{ else }}Slides not released{{ end }}</span></div>
-                        {{ end }}
-                      {{ end }}
-                    </div>
-
-                    <div class="col-md-8 d-flex">
+                    <div class="col-12 d-flex">
                       <div class="card-body d-flex flex-column w-100">
-                        <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
-                          <span class="badge text-bg-light border">Lecture {{ .number }}</span>
-                          <span class="text-nowrap">{{ partial "schedule-date.html" (dict "date" .date "format" site.Params.scheduleDateFormat) }}</span>
-                        </div>
-                        <h4 class="card-title h5 mb-0 text-break">{{ .title }}</h4>
+                        <div class="small mb-1">{{ partial "schedule-date.html" (dict "date" .date "format" site.Params.scheduleDateFormat) }}</div>
+                        <h4 class="card-title h5 mb-0 text-break">Lecture {{ .number }}: {{ .title }}</h4>
+
+                        {{ with .description }}<p class="card-text small text-body-secondary mt-2 mb-0">{{ . }}</p>{{ end }}
 
                         {{ with .reference }}
                           <div class="small mt-3">
@@ -164,7 +130,12 @@
                         {{ if or .notes .slides }}
                           <div class="schedule-card-actions d-flex flex-wrap gap-2 mt-auto pt-3">
                             {{ range .notes }}<a class="btn btn-sm btn-outline-primary" href="{{ .url }}">Notes</a>{{ end }}
-                            {{ range .slides }}{{ with $page.Resources.GetMatch (printf "slides/%s" .file) }}<a class="btn btn-sm btn-primary" href="{{ .RelPermalink }}">Slides</a>{{ end }}{{ end }}
+                            {{ range .slides }}
+                              {{ $file := .file }}
+                              {{ with $page.Resources.GetMatch (printf "slides/%s" $file) }}
+                                <a class="btn btn-sm btn-primary" href="{{ .RelPermalink }}">Slides</a>
+                              {{ end }}
+                            {{ end }}
                           </div>
                         {{ end }}
                       </div>

@@ -105,10 +105,3 @@
   border-left: 3px solid var(--course-accent);
   background: var(--bs-tertiary-bg);
 }
-
-@media (max-width: 767.98px) {
-  .schedule-card-media {
-    border-right: 0 !important;
-    border-bottom: 1px solid var(--bs-border-color) !important;
-  }
-}

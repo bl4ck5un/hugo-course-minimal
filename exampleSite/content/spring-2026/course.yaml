@@ -46,9 +46,7 @@ schedule:
           assignment:
             - "Lab 1: Model a small web application"
         - number: null
-          date: "2026-01-16"
-          resume_date: "2026-01-21"
-          title: "Winter recess"
+          text: "Winter recess, January 16–20"
     - title: "Section II: Secure Systems"
       lectures:
         - number: 3
