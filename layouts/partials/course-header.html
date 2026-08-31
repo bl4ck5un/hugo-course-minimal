@@ -9,12 +9,12 @@
         {{ site.Params.brandText | default site.Title }}
       {{ end }}
     </a>
-    <ul class="navbar-nav ms-auto mb-0 ps-0">
+    <ul class="navbar-nav ms-auto">
       {{ range site.Menus.main }}
         <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">
           {{ if .HasChildren }}
-            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ .Name }}</button>
-            <ul class="dropdown-menu dropdown-menu-end mb-0 ps-0">
+            <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ .Name }}</button>
+            <ul class="dropdown-menu dropdown-menu-end">
               {{ range .Children }}<li><a class="dropdown-item" href="{{ .URL | relURL }}">{{ .Name }}</a></li>{{ end }}
             </ul>
           {{ else }}

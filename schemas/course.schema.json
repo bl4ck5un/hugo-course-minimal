@@ -88,6 +88,7 @@
       "additionalProperties": false,
       "required": ["sections"],
       "properties": {
+        "note": {"type": "string", "minLength": 1},
         "sections": {
           "type": "array",
           "minItems": 1,
@@ -153,6 +154,7 @@
           "minItems": 1,
           "items": {"type": "string", "minLength": 1}
         },
+        "hands_on": {"type": "string", "minLength": 1},
         "description": {"type": "string"},
         "note_text": {"type": "string"}
       }

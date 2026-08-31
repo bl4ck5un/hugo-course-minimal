@@ -31,6 +31,7 @@ staff:
     time: "4–5pm"
 
 schedule:
+  note: "The schedule may be updated."
   sections:
     - title: "Section I: Foundations"
       lectures:
@@ -45,6 +46,7 @@ schedule:
               url: "https://example.com/reading"
           assignment:
             - "Lab 1: Model a small web application"
+          hands_on: "Inspecting HTTP requests"
         - number: null
           text: "Winter recess, January 16–20"
     - title: "Section II: Secure Systems"

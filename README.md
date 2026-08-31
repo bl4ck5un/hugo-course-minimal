@@ -43,6 +43,7 @@ params:
   brandText: Example University
   accentColor: "#214761"
   heroImage: /hero.svg
+  handsOnColor: success
   customCSS:
     - /css/site.css
   repositoryURL: https://github.com/example/course-site
@@ -59,6 +60,10 @@ Hugo assets under `assets/`.
 Use `brandHTML` instead of `brandText` when the navbar brand needs small,
 trusted HTML such as an institutional wordmark span. `brandLogo` remains the
 preferred option for image-based marks.
+
+`handsOnColor` controls the Bootstrap contextual color used for hands-on
+component callouts. Set it to a Bootstrap name such as `success`, `primary`,
+`info`, or `warning`; it defaults to `success`.
 
 ## Course edition
 
@@ -110,6 +115,7 @@ instructor:
 staff: null
 
 schedule:
+  note: "The schedule may be updated."
   sections:
     - title: "Section I: Foundations"
       lectures:
@@ -124,6 +130,7 @@ schedule:
               url: "https://example.com/reading"
           assignment:
             - "Lab 1: Threat modeling"
+          hands_on: "Inspecting HTTP requests"
 ```
 
 ISO schedule dates are rendered as semantic HTML and formatted with Hugo's
