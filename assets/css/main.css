@@ -117,6 +117,29 @@
   height: auto !important;
 }
 
+.content-body figure img {
+  border-radius: var(--bs-border-radius-lg);
+}
+
+.content-body {
+  min-width: 0;
+}
+
+.content-body .highlight {
+  margin: 1rem 0;
+}
+
+.content-body pre {
+  overflow-x: auto;
+  padding: 0.875rem 1rem;
+  border-radius: var(--bs-border-radius);
+  background: var(--bs-tertiary-bg);
+}
+
+.content-body .highlight pre {
+  margin: 0;
+}
+
 .content-body blockquote {
   margin: 1rem 0;
   padding: 0.65rem 1rem;

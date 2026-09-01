@@ -21,7 +21,7 @@
       <p class="small fw-semibold text-primary text-uppercase mb-2">
         {{ site.Params.courseCode }}
       </p>
-      <h1 class="h2 fw-semibold mb-3">{{ site.Params.courseTitle | default $page.Title }}</h1>
+      <h1 class="fw-semibold mb-3">{{ site.Params.courseTitle | default $page.Title }}</h1>
     </div>
   </header>
 
@@ -127,7 +127,14 @@
                       {{ with .hands_on }}
                         <div class="schedule-message">
                           <span class="schedule-message-marker bg-{{ $handsOnColor }}" aria-hidden="true"></span>
-                          <div><span class="fw-semibold">Hands-on component:</span> {{ . }}</div>
+                          <div>
+                            <span class="fw-semibold">Hands-on component:</span>
+                            {{- if reflect.IsMap . }}
+                              <a class="text-break" href="{{ .url | relURL }}">{{ .label }}</a>
+                            {{- else }}
+                              {{ . }}
+                            {{- end }}
+                          </div>
                         </div>
                       {{ end }}
 

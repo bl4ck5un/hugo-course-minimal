@@ -35,6 +35,10 @@ Then configure Hugo:
 ```yaml
 theme: hugo-course-minimal
 
+markup:
+  highlight:
+    style: github
+
 params:
   currentCoursePath: /spring-2026
   courseCode: CPSC 4000
@@ -89,9 +93,11 @@ Background in programming is recommended.
 {{</* /fold */>}}
 ```
 
-Lecture notes can use `layout: note`. Optional front matter fields
-`course_page`, `course_label`, `lecture`, and `lecture_date` render the small
-metadata line under the title, and `toc: false` hides the section sidebar.
+Standalone pages display a section sidebar when they contain headings. The
+optional `lecture` and `lecture_date` front matter fields render a small
+metadata line under the title. Lecture notes can use `layout: note`; optional
+`course_page` and `course_label` fields add course context to that metadata.
+Set `toc: false` to hide the sidebar on either page type.
 
 ## Course data
 
@@ -130,8 +136,13 @@ schedule:
               url: "https://example.com/reading"
           assignment:
             - "Lab 1: Threat modeling"
-          hands_on: "Inspecting HTTP requests"
+          hands_on:
+            label: "Inspecting HTTP requests"
+            url: "/hands-on/http-requests/"
 ```
+
+Use a string for an unlinked hands-on component, or provide `label` and `url`
+as shown above to link the component from its schedule entry.
 
 ISO schedule dates are rendered as semantic HTML and formatted with Hugo's
 `params.scheduleDateFormat` setting, which defaults to `01-02 (Mon)` (for

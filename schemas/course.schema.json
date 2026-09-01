@@ -154,7 +154,13 @@
           "minItems": 1,
           "items": {"type": "string", "minLength": 1}
         },
-        "hands_on": {"type": "string", "minLength": 1},
+        "hands_on": {
+          "description": "A hands-on activity shown as plain text or as a link.",
+          "oneOf": [
+            {"type": "string", "minLength": 1},
+            {"$ref": "#/$defs/link"}
+          ]
+        },
         "description": {"type": "string"},
         "note_text": {"type": "string"}
       }

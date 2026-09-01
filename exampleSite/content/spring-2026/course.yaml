@@ -46,7 +46,9 @@ schedule:
               url: "https://example.com/reading"
           assignment:
             - "Lab 1: Model a small web application"
-          hands_on: "Inspecting HTTP requests"
+          hands_on:
+            label: "Inspecting HTTP requests"
+            url: "https://example.com/hands-on/http-requests"
         - number: null
           text: "Winter recess, January 16–20"
     - title: "Section II: Secure Systems"

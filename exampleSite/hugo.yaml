@@ -11,6 +11,8 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  highlight:
+    style: github
 
 params:
   currentCoursePath: /spring-2026
