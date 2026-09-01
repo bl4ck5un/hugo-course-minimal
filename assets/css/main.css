@@ -16,7 +16,9 @@
 .schedule-card {
   border: 0;
   border-left: 0.25rem solid var(--course-accent);
-  background-color: color-mix(in srgb, var(--course-accent) 4%, var(--bs-body-bg));
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  background-color: color-mix(in srgb, var(--course-accent) 8%, var(--bs-body-bg));
   box-shadow: 0 0.125rem 0.5rem rgba(var(--bs-body-color-rgb), 0.08);
 }
 
