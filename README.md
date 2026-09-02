@@ -157,8 +157,9 @@ point in the schedule. A null lecture number identifies a recess:
   text: "October recess, October 20–25"
 ```
 
-PDF and PowerPoint files both render as “Slides” download buttons. The
-schedule does not display slide preview images.
+PDF and PowerPoint files both render as “Slides” download buttons with the
+file format and download size. The schedule does not display slide preview
+images.
 
 ## Menus and archives
 

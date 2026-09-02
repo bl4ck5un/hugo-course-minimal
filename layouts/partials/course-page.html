@@ -150,7 +150,22 @@
                           {{ range .notes }}<a class="btn btn-sm btn-outline-primary" href="{{ .url }}">Notes</a>{{ end }}
                           {{ range .slides }}
                             {{ with $page.Resources.GetMatch (printf "slides/%s" .file) }}
-                              <a class="btn btn-sm btn-primary" href="{{ .RelPermalink }}">Slides</a>
+                              {{ $format := path.Ext .Name | strings.TrimPrefix "." | upper }}
+                              {{ $bytes := len .Content }}
+                              {{ $size := printf "%d B" $bytes }}
+                              {{ if ge $bytes 1000000 }}
+                                {{ $size = printf "%.1f MB" (div (float $bytes) 1000000) }}
+                              {{ else if ge $bytes 1000 }}
+                                {{ $size = printf "%.1f KB" (div (float $bytes) 1000) }}
+                              {{ end }}
+                              <a class="btn btn-sm btn-primary" href="{{ .RelPermalink }}">
+                                {{ if eq $format "PDF" }}
+                                  {{ partial "icons/filetype-pdf.html" . }}
+                                {{ else }}
+                                  <span aria-hidden="true">📄</span>
+                                {{ end }}
+                                Slides <span class="small">({{ $format }} · {{ $size }})</span>
+                              </a>
                             {{ end }}
                           {{ end }}
                         </div>
