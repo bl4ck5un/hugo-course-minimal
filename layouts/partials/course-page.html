@@ -77,9 +77,9 @@
             <div class="col-md-6">
               <h3 class="h6">{{ .role }}</h3>
               <div class="d-flex gap-2 align-items-start my-2">
-                <img class="person-photo flex-shrink-0" src="{{ strings.TrimPrefix "/" .photo | relURL }}" alt="{{ .name }}">
+                {{ with .photo }}<img class="person-photo flex-shrink-0" src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ $staff.name }}">{{ end }}
                 <div class="small">
-                  <p class="fw-semibold mb-1">{{ .name }}</p>
+                  <p class="fw-semibold mb-1">{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</p>
                   {{ with .office_hours }}<p class="mb-0"><span class="text-body-secondary">Office hours:</span> {{ .day }}, {{ .time }}{{ with .location }} in {{ . }}{{ end }}</p>{{ end }}
                 </div>
               </div>
