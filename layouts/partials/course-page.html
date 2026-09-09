@@ -117,13 +117,6 @@
                           </div>
                       {{ end }}
 
-                      {{ with .assignment }}
-                        <div class="schedule-message">
-                          <span class="schedule-message-marker bg-info" aria-hidden="true"></span>
-                          <ul class="list-unstyled d-grid gap-1 mb-0">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
-                        </div>
-                      {{ end }}
-
                       {{ with .hands_on }}
                         <div class="schedule-message">
                           <span class="schedule-message-marker bg-{{ $handsOnColor }}" aria-hidden="true"></span>
@@ -136,6 +129,34 @@
                             {{- end }}
                           </div>
                         </div>
+                      {{ end }}
+
+                      {{ with .assignment }}
+                      <div class="schedule-message">
+                        <span class="schedule-message-marker bg-primary" aria-hidden="true"></span>
+                        <div>
+                          <span class="badge rounded-pill text-bg-primary">New assignment</span>
+                          {{ if eq (len .) 1 }}
+                            <span class="ms-1">{{ index . 0 | markdownify }}</span>
+                          {{ else }}
+                            <ul class="list-unstyled mb-0">{{ range . }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
+                          {{ end }}
+                        </div>
+                      </div>
+                      {{ end }}
+
+                      {{ with .due }}
+                      <div class="schedule-message">
+                        <span class="schedule-message-marker bg-danger" aria-hidden="true"></span>
+                        <div>
+                          <span class="badge rounded-pill text-bg-danger">Deadline</span>
+                          {{ if eq (len .) 1 }}
+                            <span class="ms-1">{{ index . 0 | markdownify }}</span>
+                          {{ else }}
+                            <ul class="list-unstyled mb-0">{{ range . }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
+                          {{ end }}
+                        </div>
+                      </div>
                       {{ end }}
 
                       {{ with .note_text }}
