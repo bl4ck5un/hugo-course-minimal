@@ -135,9 +135,9 @@
                       <div class="schedule-message">
                         <span class="schedule-message-marker bg-primary" aria-hidden="true"></span>
                         <div>
-                          <span class="badge rounded-pill text-bg-primary">New assignment</span>
+                          <span class="fw-semibold">New assignment:</span>
                           {{ if eq (len .) 1 }}
-                            <span class="ms-1">{{ index . 0 | markdownify }}</span>
+                            <span>{{ index . 0 | markdownify }}</span>
                           {{ else }}
                             <ul class="list-unstyled mb-0">{{ range . }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
                           {{ end }}
