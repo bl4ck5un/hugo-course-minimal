@@ -39,7 +39,7 @@
       {{ with $updates }}
         <section class="border-bottom mb-4 pb-4" id="announcements">
           <h2>Announcements</h2>
-          <ul>{{ range . }}<li>{{ .text }}</li>{{ end }}</ul>
+          <ul>{{ range . }}<li>{{ .text | markdownify }}</li>{{ end }}</ul>
         </section>
       {{ end }}
 
