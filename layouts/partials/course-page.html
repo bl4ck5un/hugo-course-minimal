@@ -103,7 +103,7 @@
                 {{ if not .number }}
                   <p class="fw-semibold text-center py-2 mb-0">{{ .text }}</p>
                 {{ else }}
-                  <article class="card schedule-card rounded-3">
+                  <article class="card schedule-card rounded-3" id="lecture-{{ .number }}" tabindex="-1" data-lecture-number="{{ .number }}" data-lecture-date="{{ .date }}"{{ if eq (lower .title) "no class" }} data-no-class="true"{{ end }}>
                     <div class="card-body px-4 py-3">
                       <div class="schedule-date small mb-1">{{ partial "schedule-date.html" (dict "date" .date "format" site.Params.scheduleDateFormat) }}</div>
                       <h4 class="h5 fw-semibold mb-0 text-break">Lecture {{ .number }}: {{ .title }}</h4>
@@ -123,7 +123,13 @@
                           <div>
                             <span class="fw-semibold">Hands-on component:</span>
                             {{- if reflect.IsMap . }}
-                              <a class="text-break" href="{{ .url | relURL }}">{{ .label }}</a>
+                              {{ $label := .label | default "Hands-on component" }}
+                              {{ if hasPrefix .url "/" }}
+                                {{ with site.GetPage .url }}
+                                  {{ $label = strings.TrimPrefix "Hands-On Component: " .Title }}
+                                {{ end }}
+                              {{ end }}
+                              <a class="text-break" href="{{ .url | relURL }}">{{ $label }}</a>
                             {{- else }}
                               {{ . }}
                             {{- end }}
@@ -204,3 +210,11 @@
 </main>
 
 {{ partial "course-footer.html" $page }}
+
+<a id="next-lecture-button" class="btn btn-primary rounded-pill shadow next-lecture-button" data-time-zone="{{ site.Params.scheduleTimeZone | default "UTC" }}" hidden>
+  <span data-next-lecture-label>Next lecture</span> <span aria-hidden="true">↓</span>
+</a>
+{{ with resources.Get "js/next-lecture.js" }}
+  {{ $script := . | minify | fingerprint }}
+  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" defer></script>
+{{ end }}

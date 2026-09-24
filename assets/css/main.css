@@ -140,6 +140,23 @@
   margin: 0;
 }
 
+.next-lecture-button {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 1020;
+  padding: .7rem 1.1rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+}
+
+.next-lecture-button[hidden] { display: none; }
+.schedule-card[id] { scroll-margin-top: 5rem; }
+.schedule-card.lecture-completed { border-left-color: var(--bs-border-color); }
+body:has(.next-lecture-button:not([hidden])) { padding-bottom: 4.5rem; }
+
 .content-body blockquote {
   margin: 1rem 0;
   padding: 0.65rem 1rem;
