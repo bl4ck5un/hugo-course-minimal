@@ -8,15 +8,20 @@
 
   function update() {
     const parts = new Intl.DateTimeFormat("en-US", {
-      timeZone: button.dataset.timeZone, year: "numeric", month: "2-digit", day: "2-digit"
+      timeZone: button.dataset.timeZone, year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hourCycle: "h23"
     }).formatToParts(new Date());
     const value = type => parts.find(part => part.type === type).value;
     const today = `${value("year")}-${value("month")}-${value("day")}`;
+    const time = `${value("hour")}:${value("minute")}`;
+    const endTime = button.dataset.endTime || "24:00";
+    const completed = item => item.dataset.lectureDate < today ||
+      (item.dataset.lectureDate === today && time >= endTime);
     lectures.forEach(item => {
-      item.classList.toggle("lecture-completed", item.dataset.lectureDate < today);
+      item.classList.toggle("lecture-completed", completed(item));
     });
-    // Keep today's lecture available for the entire class day.
-    const next = lectures.find(item => item.dataset.lectureDate >= today);
+    // Keep today's lecture available until class ends in the course timezone.
+    const next = lectures.find(item => !completed(item));
     button.hidden = !next;
     if (!next) return;
     button.href = `#${next.id}`;

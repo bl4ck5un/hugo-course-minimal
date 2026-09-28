@@ -211,7 +211,7 @@
 
 {{ partial "course-footer.html" $page }}
 
-<a id="next-lecture-button" class="btn btn-primary rounded-pill shadow next-lecture-button" data-time-zone="{{ site.Params.scheduleTimeZone | default "UTC" }}" hidden>
+<a id="next-lecture-button" class="btn btn-primary rounded-pill shadow next-lecture-button" data-time-zone="{{ site.Params.scheduleTimeZone | default "UTC" }}" data-end-time="{{ site.Params.scheduleEndTime | default "24:00" }}" hidden>
   <span data-next-lecture-label>Next lecture</span> <span aria-hidden="true">↓</span>
 </a>
 {{ with resources.Get "js/next-lecture.js" }}
