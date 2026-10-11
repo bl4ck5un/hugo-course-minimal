@@ -22,6 +22,7 @@
     });
     // Keep today's lecture available until class ends in the course timezone.
     const next = lectures.find(item => !completed(item));
+    lectures.forEach(item => item.classList.toggle("lecture-next", item === next));
     button.hidden = !next;
     if (!next) return;
     button.href = `#${next.id}`;

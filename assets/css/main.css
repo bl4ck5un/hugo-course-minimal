@@ -1,3 +1,9 @@
+.page-content a,
+.page-content a:hover,
+.page-content a:focus {
+  text-decoration: none !important;
+}
+
 .site-header {
   background: var(--course-accent);
 }
@@ -15,8 +21,8 @@
 
 .schedule-card {
   border: 0;
-  border-left: 0.25rem solid color-mix(in srgb, var(--course-accent) 55%, var(--bs-body-bg));
-  background-color: color-mix(in srgb, var(--course-accent) 8%, var(--bs-body-bg));
+  border-left: 0.25rem solid #6083aa;
+  background-color: #edf3fa;
   box-shadow: 0 0.125rem 0.5rem rgba(var(--bs-body-color-rgb), 0.08);
 }
 
@@ -97,7 +103,7 @@
 
 .toc #TableOfContents a:hover {
   color: var(--bs-link-color);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .person-photo {
@@ -152,7 +158,11 @@
 
 .next-lecture-button[hidden] { display: none; }
 .schedule-card[id] { scroll-margin-top: 5rem; }
-.schedule-card.lecture-completed { border-left-color: var(--bs-border-color); }
+.schedule-card.lecture-completed {
+  border-left-color: #b89b65;
+  background-color: #f7f3eb;
+}
+.schedule-card.lecture-next { border-left-color: #315f91; }
 body:has(.next-lecture-button:not([hidden])) { padding-bottom: 4.5rem; }
 
 .content-body blockquote {

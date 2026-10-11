@@ -173,7 +173,9 @@
                       {{ end }}
 
                       {{ if or .notes .slides }}
-                        <div class="d-flex flex-wrap gap-2 pt-3">
+                        <div class="schedule-message">
+                          <span class="schedule-message-marker bg-primary" aria-hidden="true"></span>
+                          <div class="d-flex flex-wrap gap-3">
                           {{ range .notes }}<a class="btn btn-sm btn-outline-primary" href="{{ .url }}">Notes</a>{{ end }}
                           {{ range .slides }}
                             {{ with $page.Resources.GetMatch (printf "slides/%s" .file) }}
@@ -185,16 +187,15 @@
                               {{ else if ge $bytes 1000 }}
                                 {{ $size = printf "%.1f KB" (div (float $bytes) 1000) }}
                               {{ end }}
-                              <a class="btn btn-sm btn-primary" href="{{ .RelPermalink }}">
+                              <a class="btn btn-sm btn-outline-primary d-inline-flex align-items-center" href="{{ .RelPermalink }}">
                                 {{ if eq $format "PDF" }}
                                   {{ partial "icons/filetype-pdf.html" . }}
-                                {{ else }}
-                                  <span aria-hidden="true">📄</span>
                                 {{ end }}
-                                Slides <span class="small">({{ $format }} · {{ $size }})</span>
+                                Slides <span class="small ms-1">({{ $format }} · {{ $size }})</span>
                               </a>
                             {{ end }}
                           {{ end }}
+                          </div>
                         </div>
                       {{ end }}
                     </div>
