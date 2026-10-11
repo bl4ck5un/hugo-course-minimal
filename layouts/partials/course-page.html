@@ -187,9 +187,9 @@
                               {{ else if ge $bytes 1000 }}
                                 {{ $size = printf "%.1f KB" (div (float $bytes) 1000) }}
                               {{ end }}
-                              <a class="btn btn-sm btn-outline-primary d-inline-flex align-items-center" href="{{ .RelPermalink }}">
+                              <a class="badge rounded-pill text-bg-primary d-inline-flex align-items-center" href="{{ .RelPermalink }}">
                                 {{ if eq $format "PDF" }}
-                                  {{ partial "icons/filetype-pdf.html" . }}
+                                  <i class="bi bi-file-earmark-pdf-fill me-1" style="font-size: 14px" aria-hidden="true"></i>
                                 {{ end }}
                                 Slides <span class="small ms-1">({{ $format }} · {{ $size }})</span>
                               </a>
