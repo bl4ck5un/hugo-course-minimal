@@ -3,7 +3,7 @@
   const button = document.getElementById("next-lecture-button");
   if (!button) return;
   const lectures = Array.from(document.querySelectorAll("[data-lecture-date]"))
-    .filter(item => !item.dataset.noClass && /^\d{4}-\d{2}-\d{2}$/.test(item.dataset.lectureDate))
+    .filter(item => /^\d{4}-\d{2}-\d{2}$/.test(item.dataset.lectureDate))
     .sort((a, b) => a.dataset.lectureDate.localeCompare(b.dataset.lectureDate));
 
   function update() {
@@ -21,7 +21,7 @@
       item.classList.toggle("lecture-completed", completed(item));
     });
     // Keep today's lecture available until class ends in the course timezone.
-    const next = lectures.find(item => !completed(item));
+    const next = lectures.find(item => !item.dataset.noClass && !completed(item));
     lectures.forEach(item => item.classList.toggle("lecture-next", item === next));
     button.hidden = !next;
     if (!next) return;
