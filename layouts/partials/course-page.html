@@ -139,11 +139,11 @@
 
                       {{ with .assignment }}
                       <div class="schedule-message">
-                        <span class="schedule-message-marker bg-primary" aria-hidden="true"></span>
+                        <span class="schedule-message-marker bg-success" aria-hidden="true"></span>
                         <div>
-                          <span class="fw-semibold">New assignment:</span>
+                          <span class="badge rounded-pill text-bg-success">New assignment</span>
                           {{ if eq (len .) 1 }}
-                            <span>{{ index . 0 | markdownify }}</span>
+                            <span class="ms-1">{{ index . 0 | markdownify }}</span>
                           {{ else }}
                             <ul class="list-unstyled mb-0">{{ range . }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
                           {{ end }}
