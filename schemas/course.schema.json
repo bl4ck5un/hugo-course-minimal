@@ -187,7 +187,8 @@
       "additionalProperties": false,
       "required": ["file"],
       "properties": {
-        "file": {"type": "string", "pattern": "\\.(pdf|pptx)$"}
+        "file": {"type": "string", "pattern": "\\.(pdf|pptx)$"},
+        "label": {"type": "string", "minLength": 1}
       }
     }
   }
