@@ -40,10 +40,6 @@
   margin-top: 1rem;
 }
 
-.schedule-message .badge a {
-  color: inherit;
-}
-
 .schedule-message-marker {
   width: 0.5rem;
   height: 0.5rem;

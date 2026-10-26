@@ -168,11 +168,10 @@
 
                       {{ with .assignment }}
                       <div class="schedule-message">
-                        <span class="schedule-message-marker bg-success" aria-hidden="true"></span>
-                        <div class="d-flex flex-wrap gap-1">
-                          {{ range . }}
-                            <span class="badge rounded-pill text-bg-success text-wrap text-start">New assignment: {{ . | markdownify }}</span>
-                          {{ end }}
+                        <span class="schedule-message-marker bg-warning" aria-hidden="true"></span>
+                        <div>
+                          <span class="fw-semibold">Assignment:</span>
+                          {{ range $index, $assignment := . }}{{ if $index }}, {{ end }}{{ $assignment | markdownify }}{{ end }}
                         </div>
                       </div>
                       {{ end }}
@@ -180,9 +179,9 @@
                       {{ with .due }}
                       <div class="schedule-message">
                         <span class="schedule-message-marker bg-danger" aria-hidden="true"></span>
-                        <div class="d-flex flex-wrap gap-1">
+                        <div>
                           {{ range . }}
-                            <span class="badge rounded-pill text-bg-danger text-wrap text-start">Deadline: {{ . | markdownify }}</span>
+                            <div><span class="fw-semibold">Deadline:</span> {{ . | markdownify }}</div>
                           {{ end }}
                         </div>
                       </div>
